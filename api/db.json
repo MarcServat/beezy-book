@@ -1,0 +1,44 @@
+{
+  "books": [
+    {
+      "id": 0,
+      "name": "You don't know JS",
+      "description": "Clousure",
+      "price": "10.00",
+      "genre": "Software Engineering",
+      "img": "you_dont_know_js.jpg"
+    },
+    {
+      "id": 1,
+      "name": "Solo en la pared",
+      "description": "Escalada en solitario de grandes paredes",
+      "price": "25.00",
+      "genre": "Deportes",
+      "img": "alex_honold.jpg"
+    },
+    {
+      "id": 2,
+      "name": "Entrenamiento para la escalada",
+      "description": "El manual definitivo para mejorar tu rendimiento",
+      "price": "30.00",
+      "genre": "Deportes",
+      "img": "entrenamiento_escalada.jpg"
+    },
+    {
+      "id": 3,
+      "name": "El abominable hombre de las nieves",
+      "description": "Elige tu aventura favorita con 28 finales posibles",
+      "price": "13.00",
+      "genre": "Ciencia ficción",
+      "img": "hombre_de_las_nieves.jpg"
+    },
+    {
+      "id": 4,
+      "name": "Viaje bajo el mar",
+      "description": "Elige tu aventura favorita con 42 finales posibles",
+      "price": "13.00",
+      "genre": "Ciencia ficción",
+      "img": "viaje_bajo_el_mar.jpg"
+    }
+  ]
+}
