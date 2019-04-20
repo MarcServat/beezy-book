@@ -40,5 +40,19 @@
       "genre": "Ciencia ficción",
       "img": "viaje_bajo_el_mar.jpg"
     }
+  ],
+  "genres": [
+    {
+      "id": 0,
+      "name": "Software Enginnering"
+    },
+    {
+      "id": 1,
+      "name": "Deportes"
+    },
+    {
+      "id": 2,
+      "name": "Ciencia ficción"
+    }
   ]
 }

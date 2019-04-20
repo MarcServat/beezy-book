@@ -1,18 +1,17 @@
 
 export default (state = {}, action) => {
   switch (action.type) {
-    case "CREATE_BOOK":
+    case "CREATE_GENRE":
       return { ...state, [action.payload.id]: action.payload };
-    case "FETCH_BOOK":
+    case "FETCH_GENRE":
       return { ...state, [action.payload.id]: action.payload };
-    case "FETCH_BOOKS":
-      console.log('fetchbooks', state, action.payload)
+    case "FETCH_GENRES":
       return {...action.payload};
-    case "EDIT_BOOK":
+    case "EDIT_GENRE":
       return { ...state, [action.payload.id]: action.payload };
-    case "DELETE_BOOK":
-      return { ...Object.values(state).reduce((acc, book) => {
-          if(book.id !== action.payload) acc[book.id] = book;
+    case "DELETE_GENRE":
+      return { ...Object.values(state).reduce((acc, genre) => {
+          if(genre.id !== action.payload) acc[genre.id] = genre;
           return acc;
         }, {})
       };

@@ -20,7 +20,7 @@ class Header extends Component {
             <NavLink to="/books" className="item">
               Books
             </NavLink>
-            <Link to="/genre" className="item">
+            <Link to="/genres" className="item">
               Genres
             </Link>
           </div>

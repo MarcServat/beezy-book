@@ -2,16 +2,16 @@ import React from "react";
 import { Link } from "react-router-dom";
 import Modal from "../Modal";
 import history from "../../history";
-import { deleteBook } from "../../actions";
+import { deleteGenre } from "../../actions";
 import { connect } from "react-redux";
 
-class BookDelete extends React.Component {
+class GenreDelete extends React.Component {
 
   state = { status: ''};
 
   renderLoader(id) {
     this.setState({status: 'loading'});
-    this.props.deleteBook(id);
+    this.props.deleteGenre(id);
   }
 
   actions() {
@@ -32,11 +32,11 @@ class BookDelete extends React.Component {
   }
 
   renderContent() {
-    if (!this.props.book) {
-      return `Are you sure you want to delete this book?`;
+    if (!this.props.genre) {
+      return `Are you sure you want to delete this genre?`;
     }
 
-    return `Are you sure you want to delete: \n ${this.props.book.name}?`;
+    return `Are you sure you want to delete: \n ${this.props.genre.name}?`;
   }
 
   render() {
@@ -52,10 +52,10 @@ class BookDelete extends React.Component {
 }
 
 const mapStateToProps = (state, props) => {
-  return { book: state.books[props.match.params.id] };
+  return { genre: state.genres[props.match.params.id] };
 };
 
 export default connect(
     mapStateToProps,
-    { deleteBook }
-)(BookDelete);
+    { deleteGenre }
+)(GenreDelete);
