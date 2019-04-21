@@ -56,8 +56,7 @@ export const fetchGenres = () => async (dispatch) => {
 };
 
 export const editGenre = (id, payload) => async dispatch => {
-  const booksResponse = await beezyAPI.get("/books");
-  
+
   const genresResponse = await beezyAPI.patch(`/genres/${id}`, payload);
 
   dispatch({ type: "EDIT_GENRE", payload: genresResponse.data });

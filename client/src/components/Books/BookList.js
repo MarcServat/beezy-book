@@ -4,16 +4,13 @@ import { Link } from "react-router-dom";
 import { fetchBooks, editBook, deleteBook } from "../../actions";
 import history from "../../history";
 import Loader from "../Loading";
+import {Query} from "react-apollo";
+import {BOOKS} from "../../Queries";
 
 class BookList extends React.Component {
 
-  componentDidMount() {
-    this.props.fetchBooks();
-  }
-
-  renderList() {
-    return this.props.books.map(book => {
-      console.log(book)
+  renderList(books) {
+    return books.map(book => {
       const img = `${process.env.PUBLIC_URL}img/${book.img}`;
       return (
           <div className="item" key={book.id}>
@@ -22,7 +19,7 @@ class BookList extends React.Component {
               <div className="header item">{book.name}</div>
               <div className="item">{book.description}</div>
               <div className="item">{book.price}<i className="euro sign icon grey" /></div>
-              <div className="item">{book.genre}</div>
+              <div className="item">{book.genre.name}</div>
               <div className="ui small basic icon buttons">
                 <button className="ui icon button">
                   <i className="edit icon"
@@ -56,8 +53,12 @@ class BookList extends React.Component {
             <i className="book icon"/>
             <div className="content">Books List</div>
           </h2>
-          <Loader active={!this.props.books.length > 0} />
-          <div className="ui big celled list">{this.renderList()}</div>
+          <Query query={BOOKS}>
+            {({loading, data}) => {
+              if (loading) return <Loader active={loading}/>
+              return <div className="ui big celled list">{this.renderList(data.books)}</div>
+            }}
+          </Query>
         </div>
     );
   }

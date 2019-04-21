@@ -5,7 +5,7 @@
       "name": "You don't know JS",
       "description": "Clousure",
       "price": "10.00",
-      "genre": "Software Engineering",
+      "genre": 0,
       "img": "you_dont_know_js.jpg"
     },
     {
@@ -13,7 +13,7 @@
       "name": "Solo en la pared",
       "description": "Escalada en solitario de grandes paredes",
       "price": "25.00",
-      "genre": "Deportes",
+      "genre": 1,
       "img": "alex_honold.jpg"
     },
     {
@@ -21,7 +21,7 @@
       "name": "Entrenamiento para la escalada",
       "description": "El manual definitivo para mejorar tu rendimiento",
       "price": "30.00",
-      "genre": "Deportes",
+      "genre": 1,
       "img": "entrenamiento_escalada.jpg"
     },
     {
@@ -29,7 +29,7 @@
       "name": "El abominable hombre de las nieves",
       "description": "Elige tu aventura favorita con 28 finales posibles",
       "price": "13.00",
-      "genre": "Ciencia ficción",
+      "genre": 2,
       "img": "hombre_de_las_nieves.jpg"
     },
     {
@@ -37,22 +37,25 @@
       "name": "Viaje bajo el mar",
       "description": "Elige tu aventura favorita con 42 finales posibles",
       "price": "13.00",
-      "genre": "Ciencia ficción",
+      "genre": 2,
       "img": "viaje_bajo_el_mar.jpg"
     }
   ],
   "genres": [
     {
       "id": 0,
-      "name": "Software Enginnering"
+      "name": "Software Enginnering",
+      "books": [1]
     },
     {
       "id": 1,
-      "name": "Deportes"
+      "name": "Deportes",
+      "books": [1, 2]
     },
     {
       "id": 2,
-      "name": "Ciencia ficción"
+      "name": "Ciencia ficción",
+      "books": [3, 4]
     }
   ]
 }
