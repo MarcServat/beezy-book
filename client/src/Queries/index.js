@@ -22,6 +22,7 @@ export const BOOK = gql`
       price
       img
       genre {
+        id
         name
       }
     }

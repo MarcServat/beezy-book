@@ -1,17 +1,19 @@
 import React, {Component} from "react";
 import { connect } from "react-redux";
-import { fetchBook, editBook, initializeFormValues } from "../../actions";
+import { fetchBook, editBook } from "../../actions";
 import BookForm from "./BookForm";
 import Loader from "../Loading";
 import {Mutation, Query} from "react-apollo";
 import {BOOK, EDIT_BOOK} from "../../Queries";
+import {Genre, Book} from '../../Models';
 
 class BookEdit extends Component {
 
   onSubmit = (formValues, editBook)=> {
-    const {name, description, genre, price} = formValues;
-    editBook({variables: {id: formValues.id, input: {name, description, genre, price}}})
-    // this.props.editBook(this.props.match.params.id, formValues);
+    console.log(formValues)
+    const book = new Book({...formValues, genreId: formValues.genreId.id});
+    console.log(book)
+    editBook({variables: {id: formValues.id, input: {...book}}})
   };
 
   render() {
@@ -24,12 +26,14 @@ class BookEdit extends Component {
           <Query query={BOOK} variables={{id: parseInt(this.props.match.params.id)}}>
             {({loading, data}) => {
               if (loading) return <Loader active={loading} />;
+              const book = new Book(data.book);
+              console.log(book)
               const initialValues = {...data.book, genre: data.book.genre.name};
               return (
                   <Mutation mutation={EDIT_BOOK} key={initialValues.id}>
                     {(editBook, { loading, error }) => (
                     <BookForm
-                        initialValues={initialValues}
+                        initialValues={book}
                         onSubmit={this.onSubmit}
                         mutation={editBook}
                     />)}

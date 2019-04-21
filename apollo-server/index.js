@@ -1,15 +1,24 @@
 // const { find, filter } = require('lodash');
 const { ApolloServer, gql } = require('apollo-server');
-const {books, genres} = require('../api/db');
-const {Book, Genre} = require('./Models');
+const { books, genres } = require('../api/db');
+const { Book, Genre} = require('./Models');
+
+const bookList = books.map(book => new Book(book));
+const genreList = genres.map(genre => new Genre(genre));
+
 
 const typeDefs = gql(`
   input BookInput {
+    id: Int!
     name: String!
     description: String
-    genre: String!
+    genreId: GenreInput!
     price: String!
     img: String
+  }
+  
+  input GenreInput {
+    id: Int!
   }
 
   type Book {
@@ -40,26 +49,21 @@ const typeDefs = gql(`
       input: BookInput!
     ): Book
   }
-
 `);
 
 const resolvers = {
   Query: {
     books() {
-      return books.map(book => {
-        return new Book(book)
-      });
+      return bookList;
     },
     book(parent, { id }) {
-      return new Book(books.find(book => book.id === id));
+      return bookList.find(book => book.id === id);
     },
     genres() {
-      return genres.map(
-          genre => new Genre(genre)
-      );
+      return genreList;
     },
     genre(parent, { id }) {
-      const genre = genres.find(
+      const genre = genreList.find(
           genre => genre.id === id
       );
 
@@ -69,13 +73,20 @@ const resolvers = {
 
   Mutation: {
     editBook: (parent, {id, input}) => {
-      let book = books.find(book => new Book(book.id === id));
+      const match = bookList.find(book => book.id === id);
 
-      if (!book) {
+      if (!match) {
         throw new Error(`Couldn't find book with id ${id}`);
       }
-      const newBook = {id, name: input.name, description: input.description, genre: book.genre, price: input.price, img: input.img}
-      return new Book(newBook);
+      console.log(match)
+
+      const book = new Book(match);
+      book.setName(input.name);
+      book.setDescription(input.description);
+      book.setPrice(input.price);
+      book.setImg(input.img);
+      return book;
+
     }
     // editGenre: (_, {genreId}) => {
     //   const genre = find(genres, {id: genreId});

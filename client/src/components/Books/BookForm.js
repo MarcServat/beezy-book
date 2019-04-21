@@ -36,7 +36,7 @@ class BookForm extends Component {
           <Field name="description"
                  component={this.renderInput}
                  label="Enter description" />
-          <Field name="genre"
+          <Field name="genreId[name]"
                  component={this.renderInput}
                  label="Enter Genre" />
           <Field name="price"
@@ -57,7 +57,7 @@ const validate = (values) => {
   if(!values.description) {
     errors.description = 'You must enter a description';
   }
-  if(!values.genre) {
+  if(!values.genreId) {
     errors.genre = 'You must enter a genre';
   }
   if(!values.price) {
