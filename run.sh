@@ -2,16 +2,8 @@
 
 cd apollo-bookstore-server
 npm i
-{
-    yarn dev &
-} || {
-    exit 0
-}
+yarn dev &
 
 cd ../client
 npm i
-{
-    npm start
-} || {
-    exit 1
-}
+npm start
