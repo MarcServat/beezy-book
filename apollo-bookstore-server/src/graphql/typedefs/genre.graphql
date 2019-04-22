@@ -1,0 +1,25 @@
+type Genre {
+    id: ID!
+    name: String!
+    books: [Book]
+}
+
+type Query {
+    genres: [Genre!]!
+    genre(id: ID!): Genre!
+}
+
+type Mutation {
+    createGenre(name: String!): Genre!
+    updateGenre(genreId: ID!, name: String!): Genre!
+    deleteGenre(genreId: ID!): Boolean!
+}
+
+type Subscription {
+    genreMutated: GenreMutationPayload!
+}
+
+type GenreMutationPayload {
+    mutation: MutationType!
+    node: Genre!
+}

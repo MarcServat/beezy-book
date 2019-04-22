@@ -1,0 +1,45 @@
+type Book {
+    id: ID!
+    name: String!
+    description: String!
+    genre: Genre!
+    price: String!
+    img: String
+}
+
+type Query {
+    books: [Book!]!
+    book(id: ID!): Book!
+}
+
+type Mutation {
+    createBook(book: newBookInput!): Book!
+    updateBook(bookId: ID!, book: BookInput!): Book!
+    deleteBook(bookId: ID!): Boolean
+}
+
+input BookInput {
+    id: ID!
+    name: String!
+    description: String!
+    price: String!
+    img: String
+    genreId: ID!
+}
+
+input newBookInput {
+    name: String!
+    description: String!
+    price: String!
+    img: String
+    genreId: ID!
+}
+
+#type Subscription {
+#    bookMutated: BookMutationPayload
+#}
+#
+#type BookMutationPayload {
+#    mutation: MutationType!
+#    node: Book
+#}
