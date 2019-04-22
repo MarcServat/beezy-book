@@ -64,4 +64,4 @@ class GenreDelete extends React.Component {
   }
 }
 
-export default connect(null, {})(GenreDelete);
+export default GenreDelete;

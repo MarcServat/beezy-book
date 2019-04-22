@@ -34,4 +34,4 @@ class GenreCreate extends Component {
   }
 }
 
-export default connect(null, {})(GenreCreate);
+export default GenreCreate;

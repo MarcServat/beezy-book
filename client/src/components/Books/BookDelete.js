@@ -63,4 +63,4 @@ class BookDelete extends React.Component {
   }
 }
 
-export default connect(null, {})(BookDelete);
+export default BookDelete;
