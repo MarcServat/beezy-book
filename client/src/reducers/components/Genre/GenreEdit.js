@@ -1,5 +1,4 @@
 import React, {Component} from "react";
-import { connect } from "react-redux";
 import GenreForm from "./GenreForm";
 import Loader from "../Loading";
 import {Mutation, Query} from "react-apollo";

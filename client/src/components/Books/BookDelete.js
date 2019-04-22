@@ -2,7 +2,6 @@ import React from "react";
 import { Link } from "react-router-dom";
 import Modal from "../Modal";
 import history from "../../history";
-import { connect } from "react-redux";
 import {BOOK, BOOKS, DELETE_BOOK} from "../../Queries";
 import Loader from "../Loading";
 import {Mutation, Query} from "react-apollo";
