@@ -9,6 +9,12 @@ import {BOOKS} from "../../Queries";
 
 class BookList extends React.Component {
 
+  componentWillUnmount() {
+    if (this.unsubscribe) {
+      this.unsubscribe();
+    }
+  }
+
   renderList(books) {
     return books.map(book => {
       const img = `${process.env.PUBLIC_URL}img/${book.img}`;
@@ -54,8 +60,9 @@ class BookList extends React.Component {
             <div className="content">Books List</div>
           </h2>
           <Query query={BOOKS}>
-            {({loading, data}) => {
+            {({loading, error, data}) => {
               if (loading) return <Loader active={loading}/>
+              if (error) return <div>`Error ${error}`</div>
               return <div className="ui big celled list">{this.renderList(data.books)}</div>
             }}
           </Query>

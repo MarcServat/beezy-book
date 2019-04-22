@@ -16,6 +16,22 @@ class BookForm extends Component {
     );
   };
 
+  renderSelect = ({input, label, meta}) => {
+    const className = `field ${meta.error && meta.touched ? 'error' : ''}`;
+
+    return (
+        <div className={className}>
+          <label>{label}</label>
+          <select {...input}>
+            <option value="">Select a genre...</option>
+            {this.props.genres.map(({id, name}) => {
+              return <option value={id} key={id}>{name}</option>})
+            }
+          </select>
+          {this.renderError(meta)}
+        </div>)
+  };
+
   renderError({error, touched}) {
     if(error && touched) {
       return (<div className="ui error message">{error}</div>);
@@ -36,12 +52,12 @@ class BookForm extends Component {
           <Field name="description"
                  component={this.renderInput}
                  label="Enter description" />
-          <Field name="genreId[name]"
-                 component={this.renderInput}
-                 label="Enter Genre" />
           <Field name="price"
                  component={this.renderInput}
                  label="Enter Price" />
+          <Field name="genre"
+                 component={this.renderSelect}
+                 label="Enter Genre" />
           <button className={`ui button primary ${this.state.status}`}>Submit</button>
         </form>
     );
@@ -57,11 +73,13 @@ const validate = (values) => {
   if(!values.description) {
     errors.description = 'You must enter a description';
   }
-  if(!values.genreId) {
-    errors.genre = 'You must enter a genre';
-  }
   if(!values.price) {
     errors.price = 'You must enter a price';
+  }
+  if(!values.genre) {
+    console.log(errors)
+    console.log(values)
+    errors.genre = 'You must enter a genre';
   }
   return errors;
 };

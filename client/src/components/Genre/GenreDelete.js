@@ -4,23 +4,27 @@ import Modal from "../Modal";
 import history from "../../history";
 import { deleteGenre } from "../../actions";
 import { connect } from "react-redux";
+import {GENRE, DELETE_GENRE, GENRES} from "../../Queries";
+import Loader from "../Loading";
+import {Mutation, Query} from "react-apollo";
 
 class GenreDelete extends React.Component {
 
   state = { status: ''};
 
-  renderLoader(id) {
+  renderLoader(id, deleteGenre) {
     this.setState({status: 'loading'});
-    this.props.deleteGenre(id);
+    deleteGenre({variables: {genreId: id}, refetchQueries: [{query: GENRES}]})
+        .then(() => history.push('/genres'));
   }
 
-  actions() {
+  actions(deleteGenre) {
     const { id } = this.props.match.params;
     return (
         <div className="actions">
           <button
               className={`ui primary button ${this.state.status}`}
-              onClick={() => this.renderLoader(id)}
+              onClick={() => this.renderLoader(id, deleteGenre)}
           >
             Delete
           </button>
@@ -41,12 +45,22 @@ class GenreDelete extends React.Component {
 
   render() {
     return (
-        <Modal
-            onDismiss={() => history.push("/")}
-            title="Delete Stream"
-            content={this.renderContent()}
-            actions={this.actions()}
-        />
+        <Query query={GENRE} variables={{id: this.props.match.params.id}}>
+          {({loading, data}) => {
+            if (loading) return <Loader active={loading} />;
+            return (
+                <Mutation mutation={DELETE_GENRE} key={data.genre.id}>
+                  {(deleteGenre, { loading, error }) => (
+                      <Modal
+                          onDismiss={() => history.push("/genres")}
+                          title="Delete Genre"
+                          content={this.renderContent()}
+                          actions={this.actions(deleteGenre)}
+                      />
+                  )}
+                </Mutation>)
+          }}
+        </Query>
     );
   }
 }

@@ -24,7 +24,7 @@ class GenreForm extends Component {
 
   onSubmit = (formValues) => {
     this.setState({status: 'loading'});
-    this.props.onSubmit(formValues);
+    this.props.onSubmit(formValues, this.props.mutation);
   };
 
   render() {

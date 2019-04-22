@@ -4,6 +4,8 @@ import { Link } from "react-router-dom";
 import { fetchGenres, editGenre, deleteGenre } from "../../actions";
 import history from "../../history";
 import Loader from "../Loading";
+import {GENRES} from "../../Queries";
+import {Query} from "react-apollo";
 
 class GenreList extends React.Component {
 
@@ -11,8 +13,8 @@ class GenreList extends React.Component {
     this.props.fetchGenres();
   }
 
-  renderList() {
-    return this.props.genres.map(genre => {
+  renderList(genres) {
+    return genres.map(genre => {
       return (
           <div className="item" key={genre.id}>
             <div className="content list">
@@ -43,7 +45,6 @@ class GenreList extends React.Component {
   }
 
   render() {
-    console.log(this.props.genres)
     return (
         <div className="ui container">
           {this.renderCreate()}
@@ -51,8 +52,13 @@ class GenreList extends React.Component {
             <i className="archive icon"/>
             <div className="content">Genre List</div>
           </h2>
-          <Loader active={!this.props.genres.length > 0} />
-          <div className="ui big celled list">{this.renderList()}</div>
+          <Query query={GENRES}>
+            {({loading, error, data}) => {
+              if (loading) return <Loader active={loading}/>
+              if (error) return <div>`Error ${error}`</div>
+              return <div className="ui big celled list">{this.renderList(data.genres)}</div>
+            }}
+          </Query>
         </div>
     );
   }
