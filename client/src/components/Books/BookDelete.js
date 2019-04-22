@@ -2,7 +2,6 @@ import React from "react";
 import { Link } from "react-router-dom";
 import Modal from "../Modal";
 import history from "../../history";
-import { deleteBook } from "../../actions";
 import { connect } from "react-redux";
 import {BOOK, BOOKS, DELETE_BOOK} from "../../Queries";
 import Loader from "../Loading";
@@ -64,11 +63,4 @@ class BookDelete extends React.Component {
   }
 }
 
-const mapStateToProps = (state, props) => {
-  return { book: state.books[props.match.params.id] };
-};
-
-export default connect(
-    mapStateToProps,
-    { deleteBook }
-)(BookDelete);
+export default connect(null, {})(BookDelete);

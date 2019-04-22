@@ -2,7 +2,6 @@ import React from "react";
 import { Link } from "react-router-dom";
 import Modal from "../Modal";
 import history from "../../history";
-import { deleteGenre } from "../../actions";
 import { connect } from "react-redux";
 import {GENRE, DELETE_GENRE, GENRES} from "../../Queries";
 import Loader from "../Loading";
@@ -50,7 +49,7 @@ class GenreDelete extends React.Component {
             if (loading) return <Loader active={loading} />;
             return (
                 <Mutation mutation={DELETE_GENRE} key={data.genre.id}>
-                  {(deleteGenre, { loading, error }) => (
+                  {(deleteGenre) => (
                       <Modal
                           onDismiss={() => history.push("/genres")}
                           title="Delete Genre"
@@ -65,11 +64,4 @@ class GenreDelete extends React.Component {
   }
 }
 
-const mapStateToProps = (state, props) => {
-  return { genre: state.genres[props.match.params.id] };
-};
-
-export default connect(
-    mapStateToProps,
-    { deleteGenre }
-)(GenreDelete);
+export default connect(null, {})(GenreDelete);

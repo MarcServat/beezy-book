@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { createGenre } from "../../actions";
 import GenreForm from "./GenreForm";
 import {Mutation, Query} from "react-apollo";
 import {CREATE_GENRE, GENRES} from "../../Queries";
@@ -22,7 +21,7 @@ class GenreCreate extends Component {
               if (loading) return <Loader active={loading} />;
               return (
                   <Mutation mutation={CREATE_GENRE} >
-                    {(createBook, { loading, error }) => (
+                    {(createBook) => (
                         <GenreForm onSubmit={this.onSubmit}
                                   genres={data.genres}
                                   mutation={createBook}/>
@@ -35,7 +34,4 @@ class GenreCreate extends Component {
   }
 }
 
-export default connect(
-    null,
-    { createGenre }
-)(GenreCreate);
+export default connect(null, {})(GenreCreate);

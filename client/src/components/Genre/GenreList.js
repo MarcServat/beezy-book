@@ -1,17 +1,12 @@
 import React from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
-import { fetchGenres, editGenre, deleteGenre } from "../../actions";
 import history from "../../history";
 import Loader from "../Loading";
 import {GENRES} from "../../Queries";
 import {Query} from "react-apollo";
 
 class GenreList extends React.Component {
-
-  componentDidMount() {
-    this.props.fetchGenres();
-  }
 
   renderList(genres) {
     return genres.map(genre => {
@@ -54,8 +49,8 @@ class GenreList extends React.Component {
           </h2>
           <Query query={GENRES}>
             {({loading, error, data}) => {
-              if (loading) return <Loader active={loading}/>
-              if (error) return <div>`Error ${error}`</div>
+              if (loading) return <Loader active={loading}/>;
+              if (error) return <div>`Error ${error}`</div>;
               return <div className="ui big celled list">{this.renderList(data.genres)}</div>
             }}
           </Query>
@@ -64,13 +59,4 @@ class GenreList extends React.Component {
   }
 }
 
-const mapStateToProps = state => {
-  return {
-    genres: Object.values(state.genres)
-  };
-};
-
-export default connect(
-    mapStateToProps,
-    { fetchGenres, editGenre, deleteGenre }
-)(GenreList);
+export default GenreList;

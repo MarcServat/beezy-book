@@ -1,7 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
-import { fetchBooks, editBook, deleteBook } from "../../actions";
 import history from "../../history";
 import Loader from "../Loading";
 import {Query} from "react-apollo";
@@ -71,13 +70,4 @@ class BookList extends React.Component {
   }
 }
 
-const mapStateToProps = state => {
-  return {
-    books: Object.values(state.books)
-  };
-};
-
-export default connect(
-    mapStateToProps,
-    { fetchBooks, editBook, deleteBook }
-)(BookList);
+export default BookList;

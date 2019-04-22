@@ -1,7 +1,6 @@
 import React, {Component} from "react";
 import { connect } from "react-redux";
 import history from '../../history'
-import { fetchBook, editBook } from "../../actions";
 import BookForm from "./BookForm";
 import Loader from "../Loading";
 import {Mutation, Query} from "react-apollo";
@@ -44,13 +43,4 @@ class BookEdit extends Component {
   }
 }
 
-const mapStateToProps = (state, props) => {
-  return {
-    book: state.books[props.match.params.id]
-  };
-};
-
-export default connect(
-    mapStateToProps,
-    { fetchBook, editBook }
-)(BookEdit);
+export default BookEdit;

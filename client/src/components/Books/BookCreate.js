@@ -34,5 +34,4 @@ class BookCreate extends Component {
   }
 }
 
-export default connect(
-    null, {})(BookCreate);
+export default connect(null, {})(BookCreate);

@@ -1,6 +1,5 @@
 import React, {Component} from "react";
 import { connect } from "react-redux";
-import { fetchGenre, editGenre } from "../../actions";
 import GenreForm from "./GenreForm";
 import Loader from "../Loading";
 import {Mutation, Query} from "react-apollo";
@@ -8,9 +7,6 @@ import {GENRE, GENRES, UPDATE_GENRE} from "../../Queries";
 import history from "../../history";
 
 class GenreEdit extends Component {
-  componentDidMount() {
-    this.props.fetchGenre(this.props.match.params.id);
-  }
 
   onSubmit = ({id, name}, editGenre) => {
     editGenre({variables: {genreId: id, name: name}, refetchQueries: [{query: GENRES}]})
@@ -43,13 +39,4 @@ class GenreEdit extends Component {
   }
 }
 
-const mapStateToProps = (state, props) => {
-  return {
-    genre: state.genres[props.match.params.id]
-  };
-};
-
-export default connect(
-    mapStateToProps,
-    { fetchGenre, editGenre }
-)(GenreEdit);
+export default GenreEdit;
