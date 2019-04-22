@@ -2,7 +2,6 @@ import React from "react";
 import { Link } from "react-router-dom";
 import Modal from "../Modal";
 import history from "../../history";
-import { connect } from "react-redux";
 import {GENRE, DELETE_GENRE, GENRES} from "../../Queries";
 import Loader from "../Loading";
 import {Mutation, Query} from "react-apollo";
@@ -27,7 +26,7 @@ class GenreDelete extends React.Component {
           >
             Delete
           </button>
-          <Link className="ui button" to="/">
+          <Link className="ui button" to="/genres">
             Cancel
           </Link>
         </div>

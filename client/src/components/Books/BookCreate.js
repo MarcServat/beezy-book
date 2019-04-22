@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import {connect} from "react-redux";
 import BookForm from "./BookForm";
 import history from '../../history';
 import {CREATE_BOOK, GENRES, BOOKS} from "../../Queries";
