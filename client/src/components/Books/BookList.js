@@ -60,7 +60,6 @@ class BookList extends React.Component {
           <Query query={BOOKS}>
             {({loading, error, data}) => {
               if (loading) return <Loader active={loading}/>
-              if (error) return <div>`Error ${error}`</div>
               return <div className="ui big celled list">{this.renderList(data.books)}</div>
             }}
           </Query>
