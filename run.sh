@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 cd apollo-bookstore-server
-npm i
+yarn install
 yarn dev &
 
 cd ../client
