@@ -1,9 +1,16 @@
 #!/usr/bin/env bash
 
 cd apollo-bookstore-server
-yarn install
-yarn dev &
+
+dpkg -s $1 yarn
+
+if [ $? -eq 0 ]; then
+  yarn install
+  yarn dev &
+else
+    echo "Yarn  is NOT installed!"
+fi
 
 cd ../client
-npm i
-npm start
+  npm install
+  npm start 
